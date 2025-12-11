@@ -5,4 +5,5 @@
  * 
  */
 module javafundamento {
+    requires javafundamento;
 }

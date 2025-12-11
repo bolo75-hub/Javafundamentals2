@@ -9,7 +9,7 @@ public class FlexibleArrayTest {
                 new FlexibleArray<>();
         System.out.println("the curent size = " + flexibleArray.size());
         flexibleArray.add(3);
-        flexibleArray.remove(i:4);
+        flexibleArray.remove(4);
 
     }
 }
