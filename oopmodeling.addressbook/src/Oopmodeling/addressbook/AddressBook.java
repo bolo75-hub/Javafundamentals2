@@ -14,7 +14,7 @@ public class AddressBook {
             }
         }
 
-        public void showAll() {
+        public void showAlls() {
             if (count == 0) {
                 System.out.println("No contacts yet.");
                 return;
