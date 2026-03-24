@@ -1,6 +1,6 @@
 package datastructure.list;
 
-public class List<E> {
+public class linkedListImpl<E> implements list<E> {
     // Referencia al último elemento de la lista
     private Node<E> last;
 
@@ -10,17 +10,21 @@ public class List<E> {
     /**
      * this method removes a nodo from the tail of the list
      *
-     * @param node
+     * @param e
      * @throws Exception
      **/
-    public void add(Node<E> node) throws Exception {
+    public void add(E e) {
 
         // 1. Comprobar si el parámetro es válido
         // Si el nodo que se pasa es null, lanzamos una excepción
-        if (node == null) {
-            throw new Exception("You can not pass a null node to the list");
+        if (e == null) {
+            try {
+                throw new Exception("You can not pass a null node to the list");
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
         }
-
+        Node<E> node = new Node<E>(e);
         // 2. Añadir el nodo al final (cola) de la lista
 
         // 2.1 Comprobar primero si el primer elemento es null
@@ -52,6 +56,26 @@ public class List<E> {
         }
     }
 
+    @Override
+    public E remove(int index) {
+        return null;
+    }
+
+    @Override
+    public E removeFromTail() {
+        return null;
+    }
+
+    @Override
+    public E removeFromHead() {
+        return null;
+    }
+
+    @Override
+    public void addToHead() {
+
+    }
+
     // Devuelve el último nodo de la lista
     public Node<E> getLast() {
         return last;
@@ -64,17 +88,17 @@ public class List<E> {
 
     public Node<E> remove() {
 
-    Node<E> temp2;
-    Node<E> temp = first;
-        while(temp !=null && temp.next != null) {
-        temp2 = temp;
-        //move to the next line
-        temp = temp.next;
-  
-    }
+        Node<E> temp2;
+        Node<E> temp = first;
+        while (temp != null && temp.next != null) {
+            temp2 = temp;
+            //move to the next line
+            temp = temp.next;
+
+        }
 
         return null;
-}
+    }
 
     // Método para imprimir la lista
     public void printList() {
@@ -98,37 +122,39 @@ public class List<E> {
         System.out.println(first.getNext().getNext().getNext().getNext().getNext().getData());
     }
 
-    class Node<E> {
 
-        // Constructor: crea un nodo con el dato que se pasa como parámetro
-        public Node(E e) {
-            data = e;
-        }
+}
 
-        // Dato almacenado en el nodo
-        private E data;
+class Node<E> {
 
-        // Cada nodo apunta al siguiente nodo de la lista
-        protected Node<E> next;
+    // Constructor: crea un nodo con el dato que se pasa como parámetro
+    public Node(E e) {
+        data = e;
+    }
 
-        // Devuelve el dato almacenado en el nodo
-        public E getData() {
-            return data;
-        }
+    // Dato almacenado en el nodo
+    private E data;
 
-        // Modifica el dato almacenado en el nodo
-        public void setData(E data) {
-            this.data = data;
-        }
+    // Cada nodo apunta al siguiente nodo de la lista
+    protected Node<E> next;
 
-        // Devuelve el siguiente nodo
-        public Node<E> getNext() {
-            return next;
-        }
+    // Devuelve el dato almacenado en el nodo
+    public E getData() {
+        return data;
+    }
 
-        // Establece cuál es el siguiente nodo
-        public void setNext(Node<E> next) {
-            this.next = next;
-        }
+    // Modifica el dato almacenado en el nodo
+    public void setData(E data) {
+        this.data = data;
+    }
+
+    // Devuelve el siguiente nodo
+    public Node<E> getNext() {
+        return next;
+    }
+
+    // Establece cuál es el siguiente nodo
+    public void setNext(Node<E> next) {
+        this.next = next;
     }
 }
