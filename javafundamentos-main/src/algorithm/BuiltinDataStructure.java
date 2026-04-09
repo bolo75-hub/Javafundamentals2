@@ -1,9 +1,7 @@
 package algorithm;
 import oopmodeling.Planet;
-import java.util.Stack;
-import java.util.Queue;
-import java.util.ArrayList;
-import java.util.LinkedList;
+
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class BuiltinDataStructure {
@@ -49,7 +47,19 @@ public class BuiltinDataStructure {
         queue.add(12300);
         System.out.println(queue.poll());
 
+        // poll is the system which the fist element of the  queue are eliminated
+        System.out.println(queue.poll());
+        Queue<String> printedTask = new LinkedList<>();
+        printedTask.add("task 1");
+        printedTask.add("task 2");
+        printedTask.add("task 3");
+        // we use the method "peek" to read the head element without remove
+        System.out.println(printedTask.peek());
+        System.out.println(printedTask.poll());
+        System.out.println(printedTask.poll());
+        TreeMap<String, Planet> tree;
+        TreeMap<String, user> users;
 
-        ArrayList<Planet> arr;
+
     }
 }
