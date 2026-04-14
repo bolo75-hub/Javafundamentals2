@@ -1,65 +1,76 @@
 package algorithm;
-import oopmodeling.Planet;
 
+import oopmodeling.Planet;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class BuiltinDataStructure {
 
+    // Definimos una clase interna User para que el código compile
+    // Si ya tienes una clase User en otro archivo, asegúrate de importarla
+    public static class User {
+        int id;
+        String name;
+
+        public User(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+    }
+
     public static void main(String[] args) {
 
-        //create two objects of class {@Link planet}
+        // planet1 usa el constructor vacío (asegúrate que existe en Planet.java)
         Planet planet1 = new Planet();
         Planet planet2 = new Planet(123, "Mars");
-        //create an object of array with a fixed size of 5
+
         Planet[] pls = new Planet[5];
         pls[0] = planet1;
         pls[1] = planet2;
-        //create an object of class (@Link arrayList)
+
         ArrayList<Planet> planets = new ArrayList<>();
-        //add an object to position 0
         planets.add(planet1);
-        //add an object to position 1
         planets.add(planet2);
-        //retrieve the value at index 1
         planets.get(1);
 
         LinkedList<String> names = new LinkedList<>();
         names.add("diego");
         names.add("rubibia");
-        //less efficient than accessing in an Array when usin index
         names.get(1);
 
         Stack<Integer> callstack = new Stack<>();
-        //add an element on the top of the stack object
         callstack.push(34);
         callstack.push(10);
         callstack.push(2);
-        //peek method is used to read the element on the top
-        System.out.println(callstack.peek());
-        //remove the element from the top of the stack
-        System.out.println(callstack.pop());
-        System.out.println(callstack.peek());
+
+        System.out.println("Stack Peek: " + callstack.peek());
+        System.out.println("Stack Pop: " + callstack.pop());
+        System.out.println("Stack Peek after pop: " + callstack.peek());
 
         Queue<Integer> queue = new ConcurrentLinkedQueue<>();
         queue.add(123);
         queue.add(12);
         queue.add(12300);
-        System.out.println(queue.poll());
+        System.out.println("Queue Poll 1: " + queue.poll());
+        System.out.println("Queue Poll 2: " + queue.poll());
 
-        // poll is the system which the fist element of the  queue are eliminated
-        System.out.println(queue.poll());
         Queue<String> printedTask = new LinkedList<>();
         printedTask.add("task 1");
         printedTask.add("task 2");
         printedTask.add("task 3");
-        // we use the method "peek" to read the head element without remove
-        System.out.println(printedTask.peek());
-        System.out.println(printedTask.poll());
-        System.out.println(printedTask.poll());
-        TreeMap<String, Planet> tree;
-        TreeMap<String, user> users;
 
+        System.out.println("Task Peek: " + printedTask.peek());
+        System.out.println("Task Poll 1: " + printedTask.poll());
+        System.out.println("Task Poll 2: " + printedTask.poll());
 
+        // CORRECCIÓN AQUÍ:
+        // 1. Inicializamos los Maps (si no, darán NullPointerException al usarlos)
+        // 2. Cambiamos 'user' por 'User' (la clase que definimos arriba)
+        TreeMap<String, Planet> tree = new TreeMap<>();
+        TreeMap<String, User> users = new TreeMap<>();
+
+        // Ejemplo de uso:
+        users.put("admin", new User(1, "Diego"));
+        System.out.println("User in Map: " + users.get("admin").name);
     }
 }

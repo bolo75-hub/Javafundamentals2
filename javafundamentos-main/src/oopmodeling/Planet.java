@@ -1,25 +1,19 @@
 package oopmodeling;
 
-public class Planet extends Celestialbody {
+public class Planet extends CelestialBody {
 
-    // Constructor vacío: crea un objeto "Planet" sin parámetros
     public Planet() {
-
+        super();
     }
 
-    // Constructor con dos parámetros
     public Planet(double mass, String name) {
-        this.name = nameOf;
-        this.mass= mass;
-        
+        this.mass = mass;
+        this.name = name;
     }
 
-    // Constructor con tres parámetros
     public Planet(double mass, String name, float radius) {
         this.mass = mass;
         this.name = name;
         this.radius = radius;
-
     }
 }
-

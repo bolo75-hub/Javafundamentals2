@@ -1,6 +1,6 @@
 package oopmodeling;
 
-public class Star extends Celestialbody {
-	
-	
+// Asegúrate que la B sea MAYÚSCULA
+public class Star extends CelestialBody {
+    // Ahora heredará setMass() correctamente
 }

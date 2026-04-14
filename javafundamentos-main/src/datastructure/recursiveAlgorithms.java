@@ -2,7 +2,7 @@ package datastructure;
 
 import java.util.List;
 
-public class recursiveAlgorithms {
+public class recursiveAlgorithms { // Clase empieza con Mayúscula
 
     // Hace una escalera de asteriscos que crece en cada fila.
     public static void draw(int n) {
@@ -29,30 +29,26 @@ public class recursiveAlgorithms {
 
     // Imprime asteriscos seguidos usando recursión.
     public static void printStars(int count) {
-        if (count == 0) return;
+        if (count <= 0) return; // Mejorado para evitar bucles infinitos con negativos
         System.out.print("* ");
         printStars(count - 1);
     }
 
-
+    // Corregido: Se agregaron las llaves faltantes
     public static void printStarsWithLoop(int count) {
-        if (count == 0) return;
-
+        if (count <= 0) return;
         for (int i = 0; i < count; i++) {
             System.out.print("* ");
-
+        }
+        System.out.println(); // Salto de línea opcional para limpieza
     }
 
     // Dibuja un rectángulo de asteriscos usando filas y columnas.
     public static void drawGrid(int rows, int cols) {
-        if (rows == 0) return;
+        if (rows <= 0) return;
         printStars(cols);
         System.out.println();
         drawGrid(rows - 1, cols);
-    }
-
-    public static void main(String[] args) {
-        printStars(15);
     }
 
     // Cuenta cuántas formas hay de moverse por una cuadrícula.
@@ -72,6 +68,7 @@ public class recursiveAlgorithms {
     }
 
     // Suma solo los números que sean impares de una lista.
+    // Nota: subList crea vistas, es eficiente pero cuidado con listas muy largas (StackOverflow).
     public static int process(List<Integer> list) {
         if (list.isEmpty()) {
             return 0;
@@ -92,10 +89,8 @@ public class recursiveAlgorithms {
         if (node == null) {
             return 0;
         }
-
         int a = analyze(node.left);
         int b = analyze(node.right);
-
         return 1 + Math.max(a, b);
     }
 
@@ -107,9 +102,19 @@ public class recursiveAlgorithms {
         return execute(s.substring(1)) + s.charAt(0);
     }
 
-    // Clase para crear los nodos del árbol.
-    private class Node<T> {
+    // Corregido: Clase Static para ser accesible por métodos estáticos
+    public static class Node<T> {
         public Node<T> left;
         public Node<T> right;
+        public T data; // Opcional: para guardar valor
+    }
+
+    public static void main(String[] args) {
+        System.out.println("--- Stars ---");
+        printStars(5);
+        System.out.println("\n--- Pattern ---");
+        pattern(3);
+        System.out.println("\n--- Execute (Reverse) ---");
+        System.out.println(execute("Recursion"));
     }
 }

@@ -1,79 +1,72 @@
 package datastructure;
 
-
-import oopmodeling.Celestialbody;
-
-import static sun.invoke.util.ValueConversions.primitiveConversion;
+import oopmodeling.CelestialBody; // Asegúrate de que el nombre sea exacto (Celestialbody vs CelestialBody)
 
 public class ConversionTest {
-    public static void main(String[] args) {
 
+    // Clase auxiliar interna para que el código compile si no tienes el archivo Planet.java
+    public static class Planet extends CelestialBody {
+        public String name;
+        public Planet() {}
+        public Planet(String name) { this.name = name; }
+    }
+
+    // Clase base para el ejemplo de polimorfismo
+    public static class CelestialBody {}
+
+    public static void main(String[] args) {
+        // Llamada al método corregido
         primitiveConversion();
 
-        //Polymorphism
-        Planet p1 =new Planet();
-        //A planet is not a star, we can not assign a object to a star object
-        //star s1 =(star)new planet();
-        //In the following two cases, a planet is of type celestialBodyand object
-        CelestialBody p2 =new Planet();
-        object p3 =new planet();
-        object p4 = new Celestialbody();
+        // --- Polimorfismo ---
+        Planet p1 = new Planet();
 
-        planet p5 = (Planet)p3;
-        system.out.println(p5);
-        system.out.println(p3);
-        system.out.println(p5 == p3);
+        // Un planeta es de tipo CelestialBody y Object
+        CelestialBody p2 = new Planet();
+        Object p3 = new Planet(); // 'Object' siempre empieza con Mayúscula
+        Object p4 = new CelestialBody();
 
-        Object[] planets = new Planet[20];
-        Planet[] pls = (Planet[]) planets;
+        // Casting (Conversión explícita)
+        Planet p5 = (Planet) p3;
 
-        /**
-         * 1 create an array of Object of size 20
-         * 2 asign each position of the array with an object of type planet
-         * 3 convert the whole array explicitly to an array of planet
-         */
+        System.out.println(p5);
+        System.out.println(p3);
+        System.out.println(p5 == p3); // Compara si apuntan al mismo objeto en memoria
 
+        // --- Manejo de Arrays ---
         Object[] objArray = new Object[20];
 
-// llenar con Planet
-        for (int i = 0; i < 20; i++)
+        // Llenar con Planet
+        for (int i = 0; i < 20; i++) {
             objArray[i] = new Planet("P" + i);
-
-// convertir explícitamente a Planet[]
-        Planet[] planetArray = new Planet[20];
-        for (int i = 0; i < 20; i++)
-            planetArray[i] = (Planet) objArray[i];
-
-
-        polymorphisMethod(p2);
-        
-
-        private static void primitiveConversion(){
-
         }
-        int num1 =234234234;
-    byte num2 = 127;
-    float num3 = 324.4f;
-    num1 = num2;
-    system.out.println(num1);
-    num2 = (byte)num1;
-    system.out.println(num2);
 
+        // Convertir explícitamente a Planet[]
+        Planet[] planetArray = new Planet[20];
+        for (int i = 0; i < 20; i++) {
+            planetArray[i] = (Planet) objArray[i];
+        }
 
-    num1 = 1235;
-    system.out.println(num1);
-    //explicit conversion from an integer to a byte number
-    num2 = (byte)num1;
-
-    system.out.println("number 2 is " + num2);
-
-
+        polymorphismMethod(p2);
     }
 
-    private static void polymorphisMethod(CelestialBody p2) {
+    // El método debe estar FUERA del main
+    private static void primitiveConversion() {
+        int num1 = 234234234;
+        byte num2 = 127;
+        float num3 = 324.4f;
+
+        // Conversión implícita (byte cabe en int)
+        num1 = num2;
+        System.out.println("num1 (desde byte): " + num1);
+
+        // Conversión explícita (Casting)
+        num1 = 1235;
+        num2 = (byte) num1; // Aquí habrá pérdida de datos porque 1235 > 127
+        System.out.println("num2 (casting de 1235): " + num2);
     }
 
-    private static void name() {
-
+    private static void polymorphismMethod(CelestialBody cb) {
+        System.out.println("Ejecutando método polimórfico");
     }
 }

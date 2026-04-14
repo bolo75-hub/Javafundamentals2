@@ -76,6 +76,11 @@ public class linkedListImpl<E> implements list<E> {
 
     }
 
+    @Override
+    public void addToHead(E e) {
+
+    }
+
     // Devuelve el último nodo de la lista
     public Node<E> getLast() {
         return last;

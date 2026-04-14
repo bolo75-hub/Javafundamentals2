@@ -1,80 +1,54 @@
 package datastructure;
-/*
- * This is a class that represent an extensible array
- * An aaray has a fixed capacity, when ranching the end
- * of the array, we have to expand it automaticaly*/
-public class FlexibleArray <E> {
+
+import java.util.Arrays;
+
+public class FlexibleArray<E> {
     private E[] elements;
-    private static final int initial_capacity = 5;
-    //the variable to sotore how many elemets we have added to the array
     private int size = 0;
+    private static final int INITIAL_CAPACITY = 5;
+    private static final int EXPANSION_FACTOR = 5;
 
-    private static int expansion_factor;
-
-    public FlexibleArray(int size) {
-        elements = (E[]) new Object[size];
-    }
-
+    @SuppressWarnings("unchecked")
     public FlexibleArray() {
-        elements = (E[]) new Object[initial_capacity];
+        // Correcto: Creamos un array de Object y lo casteamos a E[]
+        this.elements = (E[]) new Object[INITIAL_CAPACITY];
     }
-    /*
-     * add an element to the array at its last position
-     * @param e
-     * */
 
-    public void add(E i){
-        //paso 0: check if we have reached to the last position
-        // if true, we have to expand the capacity of the array
-        if(size == elements.length) {
-            //the array is full, so we have to extend its capacity
-            //first we create a new array with a mayor capacity
-            E[] newArr = (E[]) new Object[elements.length + expansion_factor];
-            //copy the elements from the old array to the new one
-           // newArr[0] = elements[0];
-          //  newArr[1] = elements[1];
-            for (int i = 0; i < elements.length; i++) {
-                newArr[i] = elements[i];
-            }
-            elements = newArr;
+    @SuppressWarnings("unchecked")
+    public void add(E element) {
+        // Redimensionar si está lleno
+        if (size == elements.length) {
+            int newCapacity = elements.length + EXPANSION_FACTOR;
+            // Usamos Arrays.copyOf que es más limpio y eficiente que un for manual
+            elements = Arrays.copyOf(elements, newCapacity);
         }
 
-        // paso 1: add the element to the last free position of the array
+        // Añadir el elemento y luego incrementar el contador
         elements[size] = element;
         size++;
-
-
-        for (int j = 0; j < elements.length; j++) {
-            if (elements[i] == null) {
-                elements[j] = i;
-                size--;
-            }
-        }
-
     }
-    /*
-     * remove an element to the array at its last position
-     * @param i
-     * */
-    public void remove ( int i) {
-       //step 1: eliminate the element at position passed by the parameter
-        elements[i] = null;
-        //elements[i] = elements[i+1];
-        //elements[i + 1] = elements[i+2];
-        //elements[i + 2] = elements[i+3];
-        //elements[i + 3] = elements[i+4];
-        //...
-        for (int j = 0; j < 5; j++) {
 
-            E e = elements[j];
+    public void remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Índice inválido: " + index);
         }
+
+        // Desplazar elementos a la izquierda para "tapar" el hueco
+        for (int i = index; i < size - 1; i++) {
+            elements[i] = elements[i + 1];
+        }
+
+        // Importante: limpiar la última posición para el Garbage Collector
+        elements[size - 1] = null;
         size--;
     }
-    public int size(){
 
+    public int size() {
+        return size;
+    }
 
-        return elements.length;
+    public E get(int index) {
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
+        return elements[index];
     }
 }
-
-

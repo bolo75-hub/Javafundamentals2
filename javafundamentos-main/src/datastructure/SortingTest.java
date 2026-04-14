@@ -1,77 +1,62 @@
 package datastructure;
 
 import java.util.Arrays;
-
 import static java.util.Arrays.sort;
 
 public class SortingTest {
     public static void main(String[] args) {
         int[] scores = {12, 24, 3232, 323, 3232, 32332, 32323, 323};
-        String[] name = {"pablo", "diego", "jorge", "juan", "ana"};
+        String[] names = {"pablo", "diego", "jorge", "juan", "ana"};
+
+        // Ordenar es obligatorio para la búsqueda binaria
         sort(scores);
+        sort(names);
+
+        // Corregido: punto y coma y coincidencia de nombres de variables
         boolean isExisting = binarySearching(234, scores);
-        System.out.println(IsExisting)
-        isExisting = LinearSearching(234, scores);
-        sort()
+        System.out.println("¿Existe (Binary)?: " + isExisting);
+
+        isExisting = linearSearching(234, scores);
+        System.out.println("¿Existe (Linear)?: " + isExisting);
     }
 
     /**
-     * In this algorithm, we search a specific element in an ordered array by
-     * comparing the element with the ones in the array one by one
-     * The time consumed in this algorithm is averagely proportional to
-     * the size of the array.
-     *
-     * @param element
-     * @param elements
-     * @return
+     * Búsqueda Lineal: Compara uno a uno.
      */
-    private static boolean LinearSearching(int element, int[] elements) {
-        if (elements == null) {
-            return false;
-        }
-        /**
-         * Steps
-         * 1 Create a loop to traverse the elements in the array
-         * 2 In the body of the loop, we compare the element with
-         * the elements of the array, if there is a match, we return
-         * true
-         */
+    private static boolean linearSearching(int element, int[] elements) {
+        if (elements == null) return false;
+
         for (int i = 0; i < elements.length; i++) {
             if (elements[i] == element) {
                 return true;
             }
-
         }
         return false;
     }
 
     /**
-     *
-     * @param element
-     * @param elements
-     * @return
+     * Búsqueda Binaria: Divide el array en mitades.
+     * Requiere que el array esté ORDENADO.
      */
-
     private static boolean binarySearching(int element, int[] elements) {
+        if (elements == null || elements.length == 0) return false;
 
-        //1 Calculate the index of the middle element
-        int middleIndex = elements.length / 2;
-        //2 If the middle element is equal to the element that we are looking for, return
-        if (elements[middleIndex] == element) {
-            return true;
+        int low = 0;
+        int high = elements.length - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2; // Evita desbordamiento en arrays gigantes
+
+            if (elements[mid] == element) {
+                return true; // Encontrado
+            }
+
+            if (elements[mid] > element) {
+                high = mid - 1; // Buscar en la mitad izquierda
+            } else {
+                low = mid + 1; // Buscar en la mitad derecha
+            }
         }
-        //2 If the current element in the array is grater, we check the left half
-        else if (elements[middleIndex] > element) {
-
-        }
-        //2 If the current element in the array is smaller than the element,
-        // we check the right half
-        else {//elements[middleIndex] < element
-
-            return false;
-        }
-
-
+        return false; // No se encontró
     }
 }
-

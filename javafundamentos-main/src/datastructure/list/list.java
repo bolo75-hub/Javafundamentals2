@@ -35,4 +35,5 @@ public interface list<E> {
     public void addToHead();
 
 
+    void addToHead(E e);
 }
