@@ -50,3 +50,4 @@ public class ArrayListImpl<E> implements list<E> {
         size++;
     }
 }
+
